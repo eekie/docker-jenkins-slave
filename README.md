@@ -23,3 +23,12 @@ The first time you login you will need to install/update some standard plugins.
 * for the rest use defaults (like execution mode == java webstart)
 
 Only when you configured your jenkins master with the "jenkins-slave". The docker slave container will be able to connect.
+
+With recent jenkins images, security is enabled by default, and the slave will not be able to connect since it is using this commmand: (see docker-compose.yml)
+
+`command: bash -c "curl http://jenkins:8080/jnlpJars/slave.jar -o /slave.jar && java -jar slave.jar -jnlpUrl http://jenkins:8080/computer/jenkins-slave/slave-agent.jnlp"`
+
+To allow the slave to connect you can either disable security in jenkins: manage jenkins >> configure global security >> uncheck activate security 
+
+or you can try adding login credential in de jnlp command mentioned above like this: `-auth user:password`
+but I didn't tested this yet.
