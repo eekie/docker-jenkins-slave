@@ -1,0 +1,7 @@
+#active-directory:1.41
+#role-strategy:2.2.0
+cloudbees-folder:5.10
+rebuild:1.25
+simple-theme-plugin:0.3
+config-file-provider:2.11
+#pipeline-utility-steps:1.6.6
