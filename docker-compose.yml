@@ -6,13 +6,14 @@ services:
         build: .
         volumes:
             - ./data:/var/jenkins_home
+            - ./files/nodes/jenkins-slave:/var/jenkins_home/nodes/jenkins-slave
             - ./jenkins_tmp:/tmp
         ports:
             - "8081:8080"
             - "50000:50000"
 
     jenkins-slave:
-        image: tails/slave-docker-git-mvn
+        image: docker-slave
         build: ./slave
         depends_on:
             - jenkins
@@ -23,13 +24,5 @@ services:
             - ./slave_tmp:/tmp
         ports:
             - "9091:8080"
-        command: bash -c "curl http://jenkins:8080/jnlpJars/slave.jar -o /slave.jar && java -jar slave.jar -jnlpUrl http://jenkins:8080/computer/jenkins-slave/slave-agent.jnlp"
 
-    jenkins-docker-slave:
-        image: foxylion/jenkins-slave
-        volumes:
-            - ./data_slave_docker:/home/jenkins
-            - /var/run/docker.sock:/var/run/docker.sock
-        environment:
-            - JENKINS_URL=http://localhost:8081
            
