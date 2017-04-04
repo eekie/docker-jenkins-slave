@@ -25,8 +25,8 @@ you want to create an additional slave:
 
 ### configure login credentials or disable jenkins security
 
-Security is enabled by default in recent jenkins versions. The slave will not be able to connect unless you disable 
-security or pass credentials from the jenkins-slave startup command (se entrypoint.sh in slave container)
+If security is enabled in your jenkins instance the slave will not be able to connect unless you disable 
+security or pass credentials from the jenkins-slave startup command (see entrypoint.sh in slave container)
 
 You can try adding login credential like this: `-auth user:password` but I did not tested this myself.
 
